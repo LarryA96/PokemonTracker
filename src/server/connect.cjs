@@ -1,21 +1,25 @@
-const { MongoClient } = require("mongodb");
-require("dotenv").config({ path: "./config.env" });
+//File path relative to app loading at the PokemonProject root
+require("dotenv").config({ path: "./src/server/config.env" });
+const { MongoClient, ServerApiVersion } = require("mongodb");
+const uri = process.env.ATLAS_URI;
 
-async function main() {
-  const db = process.env.ATLAS_URI;
-  const client = new MongoClient(db);
+// Create a MongoClient with a MongoClientOptions object to set the Stable API version
+const client = new MongoClient(uri, {
+  serverApi: {
+    version: ServerApiVersion.v1,
+    strict: true,
+    deprecationErrors: true,
+  },
+});
 
-  try {
+//Create and store database connection for use in other files
+let database;
+module.exports = {
+  connectToServer: async () => {
     await client.connect();
-    const collections = await client.db("Pokemon-Project").collections();
-    collections.forEach((collection) =>
-      console.log(collection.s.namespace.collection),
-    );
-  } catch (error) {
-    console.error("Error occurred:", error);
-  } finally {
-    await client.close();
-  }
-}
-
-main();
+    database = client.db("PokemonProject");
+  },
+  getDb: () => {
+    return database;
+  },
+};

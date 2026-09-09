@@ -5,7 +5,7 @@ import Header from "./components/Header";
 import Footer from "./components/Footer";
 import "./styles.css";
 
-function Login() {
+export default function Login() {
   return (
     <>
       <Header />
