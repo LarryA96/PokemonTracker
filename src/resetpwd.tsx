@@ -1,18 +1,24 @@
-import { StrictMode, useState } from "react";
-import { createRoot } from "react-dom/client";
-import { BrowserRouter, Routes, Route, Link } from "react-router-dom";
+import { useState } from "react";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
 import "./styles.css";
 
 export default function Resetpwd() {
+  const [email, setEmail] = useState("");
+
   return (
     <>
       <Header />
       <h2>Reset Password</h2>
       <form id="reset-form">
         <label htmlFor="email">Email:</label>
-        <input type="text" id="email" name="email" />
+        <input
+          type="text"
+          id="email"
+          name="email"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+        />
         <label htmlFor="new-password">New Password:</label>
         <input type="password" id="password" name="password" />
         <label htmlFor="confirm-password">Confirm New Password:</label>
