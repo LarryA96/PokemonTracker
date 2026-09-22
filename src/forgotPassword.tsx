@@ -20,11 +20,3 @@ export default function ForgotPassword() {
     </>
   );
 }
-
-createRoot(document.getElementById("root")!).render(
-  <StrictMode>
-    <BrowserRouter>
-      <ForgotPassword />
-    </BrowserRouter>
-  </StrictMode>,
-);

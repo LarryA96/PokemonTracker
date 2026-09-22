@@ -2,7 +2,8 @@ const express = require("express");
 const { ObjectId } = require("mongodb");
 
 const database = require("./connect.cjs");
-const { hashPassword, comparePassword } = require("./passHash.cjs");
+const { hashPassword, comparePassword } = require("./services/passHash.cjs");
+const { initializeUserGames } = require("./services/userGames.cjs");
 
 const usersRoutes = express.Router();
 
@@ -109,11 +110,16 @@ usersRoutes.route("/users").post(async (req, res) => {
       creationDate: new Date(),
     };
 
+    //Insert user
     const result = await db.collection("Users").insertOne(newUser);
+
+    //Create user's games
+    const userGamesCount = await initializeUserGames(result.insertedId);
 
     res.status(201).json({
       message: "User created successfully",
       userId: result.insertedId,
+      gamesInitialized: userGamesCount,
     });
   } catch (err) {
     console.error("Error creating user:", err);
@@ -211,17 +217,10 @@ usersRoutes.route("/users/:id").delete(async (req, res) => {
   }
 });
 
-//TEMPORARY
-
-usersRoutes.route("/users/:id/test-password").get(async (req, res) => {
+//Authenticate user password
+usersRoutes.route("/users/:email/validate").post(async (req, res) => {
   try {
-    if (!ObjectId.isValid(req.params.id)) {
-      return res.status(400).json({
-        error: "Invalid user ID",
-      });
-    }
-
-    const { password } = req.query;
+    const { password } = req.body;
 
     if (!password) {
       return res.status(400).json({
@@ -232,7 +231,7 @@ usersRoutes.route("/users/:id/test-password").get(async (req, res) => {
     const db = database.getDb();
 
     const user = await db.collection("Users").findOne({
-      _id: new ObjectId(req.params.id),
+      email: req.params.email,
     });
 
     if (!user) {
@@ -245,6 +244,7 @@ usersRoutes.route("/users/:id/test-password").get(async (req, res) => {
 
     res.status(200).json({
       passwordMatch: isMatch,
+      user: user._id,
     });
   } catch (err) {
     console.error("Error testing password:", err);

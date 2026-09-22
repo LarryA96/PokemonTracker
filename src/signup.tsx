@@ -1,39 +1,116 @@
-import { StrictMode, useState } from "react";
-import { createRoot } from "react-dom/client";
-import { BrowserRouter, Routes, Route, Link } from "react-router-dom";
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
 import "./styles.css";
 
 export default function Signup() {
+  const navigate = useNavigate();
+
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [errorMessage, setErrorMessage] = useState("");
+
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+
+    setErrorMessage("");
+
+    try {
+      const response = await fetch("http://localhost:3000/users", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          email,
+          password,
+        }),
+      });
+
+      const data = await response.json();
+
+      if (response.status === 409) {
+        setErrorMessage("That email is already registered.");
+        return;
+      }
+
+      if (!response.ok) {
+        setErrorMessage(data.error || "Failed to create account.");
+        return;
+      }
+
+      // Signup was successful.
+      // Send a message to the login page through React Router state.
+      navigate("/", {
+        state: {
+          signupSuccess: "Account created successfully! You can now log in.",
+        },
+      });
+    } catch (err) {
+      console.error("Signup error:", err);
+      setErrorMessage("Unable to connect to the server.");
+    }
+  };
+
+  const handleBack = () => {
+    navigate("/");
+  };
+
   return (
     <>
       <Header />
-      <h2>Create Account</h2>
-      <form id="signup-form">
-        <label htmlFor="email">Email:</label>
-        <input type="text" id="email" name="email" />
-        <label htmlFor="password">Password:</label>
-        <input type="password" id="password" name="password" />
-        <button type="button">Back</button>
-        <button type="submit">Sign Up</button>
-      </form>
-      <br />
-      <h4>Verification Code</h4>
-      <form id="verification-code">
-        <label htmlFor="code">Verification Code:</label>
-        <input type="text" id="code" name="code" />
-        <button type="submit">Confirm</button>
-      </form>
+
+      <main className="signup-page">
+        <div className="signup-container">
+          <h2>Create Account</h2>
+
+          <form className="signup-form" onSubmit={handleSubmit}>
+            <div className="signup-field">
+              <label htmlFor="email">Email:</label>
+              <input
+                type="email"
+                id="email"
+                name="email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                required
+              />
+            </div>
+
+            <div className="signup-field">
+              <label htmlFor="password">Password:</label>
+              <input
+                type="password"
+                id="password"
+                name="password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                minLength={8}
+                required
+              />
+            </div>
+
+            {errorMessage && <p className="signup-error">{errorMessage}</p>}
+
+            <div className="signup-buttons">
+              <button
+                type="button"
+                className="signup-back-button"
+                onClick={handleBack}
+              >
+                Back
+              </button>
+
+              <button type="submit" className="signup-button">
+                Sign Up
+              </button>
+            </div>
+          </form>
+        </div>
+      </main>
+
       <Footer />
     </>
   );
 }
-
-createRoot(document.getElementById("root")!).render(
-  <StrictMode>
-    <BrowserRouter>
-      <Signup />
-    </BrowserRouter>
-  </StrictMode>,
-);

@@ -1,111 +1,1263 @@
-:root {
-  --text: #6b6375;
-  --text-h: #08060d;
-  --bg: #fff;
-  --border: #e5e4e7;
-  --code-bg: #f4f3ec;
-  --accent: #aa3bff;
-  --accent-bg: rgba(170, 59, 255, 0.1);
-  --accent-border: rgba(170, 59, 255, 0.5);
-  --social-bg: rgba(244, 243, 236, 0.5);
-  --shadow:
-    rgba(0, 0, 0, 0.1) 0 10px 15px -3px, rgba(0, 0, 0, 0.05) 0 4px 6px -2px;
-
-  --sans: system-ui, 'Segoe UI', Roboto, sans-serif;
-  --heading: system-ui, 'Segoe UI', Roboto, sans-serif;
-  --mono: ui-monospace, Consolas, monospace;
-
-  font: 18px/145% var(--sans);
-  letter-spacing: 0.18px;
-  color-scheme: light dark;
-  color: var(--text);
-  background: var(--bg);
-  font-synthesis: none;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-
-  @media (max-width: 1024px) {
-    font-size: 16px;
-  }
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --text: #9ca3af;
-    --text-h: #f3f4f6;
-    --bg: #16171d;
-    --border: #2e303a;
-    --code-bg: #1f2028;
-    --accent: #c084fc;
-    --accent-bg: rgba(192, 132, 252, 0.15);
-    --accent-border: rgba(192, 132, 252, 0.5);
-    --social-bg: rgba(47, 48, 58, 0.5);
-    --shadow:
-      rgba(0, 0, 0, 0.4) 0 10px 15px -3px, rgba(0, 0, 0, 0.25) 0 4px 6px -2px;
-  }
-
-  #social .button-icon {
-    filter: invert(1) brightness(2);
-  }
+html,
+body,
+#root {
+  margin: 0;
+  min-height: 100%;
 }
 
 #root {
-  width: 1126px;
-  max-width: 100%;
-  margin: 0 auto;
-  text-align: center;
-  border-inline: 1px solid var(--border);
-  min-height: 100svh;
+  min-height: 100vh;
   display: flex;
   flex-direction: column;
+}
+
+main {
+  flex: 1;
+}
+
+/* =========================
+   HEADER
+   ========================= */
+
+.header {
+  width: 100%;
+  height: 40px;
+
+  display: flex;
+  align-items: center;
+  justify-content: left;
+
+  box-sizing: border-box;
+  border-bottom: 1px solid #64748b;
+
+  font-family: "Inter", sans-serif;
+
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  background-color: #ffffff;
+}
+
+/* Logo */
+.header img {
+  height: 100%;
+
+  object-fit: contain;
+
+  margin-right: 12px;
+}
+
+/* Game Tracker text */
+.header h1 {
+  margin: 0;
+
+  color: #0f172a;
+
+  font-size: 22px;
+  font-weight: 600;
+}
+
+/* =========================
+   NAVBAR
+   ========================= */
+
+.navbar {
+  width: 100%;
+  background-color: #f8fafc;
+  border-top: 1px solid #64748b;
+  border-bottom: 1px solid #64748b;
+
+  position: sticky;
+  top: 40px;
+  z-index: 1000;
+}
+
+.navbar ul {
+  width: 100%;
+  margin: 0;
+  padding: 0;
+
+  display: flex;
+  list-style: none;
+}
+
+.nav-item {
+  flex: 1;
+  margin: 0;
+  padding: 0;
+
+  border-right: 1px solid #64748b;
+}
+
+.nav-item:first-child {
+  border-left: 1px solid #64748b;
+}
+
+.nav-item a {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  width: 100%;
+  height: 40px;
+
+  color: #0f172a;
+  background-color: #f8fafc;
+
+  text-decoration: none;
+  font-size: 15px;
+  font-weight: 500;
+
+  transition:
+    background-color 0.15s ease,
+    color 0.15s ease;
+}
+
+/* Hover */
+.nav-item a:hover {
+  background-color: #e2e8f0;
+}
+
+/* Currently active page */
+.nav-item a.active {
+  color: #ffffff;
+  background-color: #4f46e5;
+}
+
+/* Active page hover */
+.nav-item a.active:hover {
+  background-color: #4f46e5;
+}
+
+/* =========================
+   SIGN UP
+   ========================= */
+
+.signup-page {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 40px 20px;
   box-sizing: border-box;
 }
 
-body {
-  margin: 0;
+.signup-container {
+  width: 100%;
+  max-width: 420px;
+  padding: 30px;
+  box-sizing: border-box;
+  background-color: #ffffff;
+  border: 1px solid #cbd5e1;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
 }
 
-h1,
-h2 {
-  font-family: var(--heading);
+.signup-container h2 {
+  margin: 0 0 25px;
+  text-align: center;
+  font-family: "Inter", sans-serif;
+  font-size: 26px;
+  font-weight: 600;
+  color: #1e293b;
+}
+
+.signup-form {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.signup-field {
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+}
+
+.signup-field label {
+  font-family: "Inter", sans-serif;
+  font-size: 14px;
   font-weight: 500;
-  color: var(--text-h);
+  color: #334155;
 }
 
-h1 {
-  font-size: 56px;
-  letter-spacing: -1.68px;
-  margin: 32px 0;
-  @media (max-width: 1024px) {
-    font-size: 36px;
-    margin: 20px 0;
+.signup-field input {
+  width: 100%;
+  padding: 11px 12px;
+  box-sizing: border-box;
+  border: 1px solid #94a3b8;
+  border-radius: 5px;
+  font-family: "Inter", sans-serif;
+  font-size: 14px;
+  outline: none;
+}
+
+.signup-field input:focus {
+  border-color: #7c3aed;
+  box-shadow: 0 0 0 2px rgba(124, 58, 237, 0.12);
+}
+
+.signup-error {
+  margin: -3px 0 0;
+  padding: 10px 12px;
+  border: 1px solid #dc2626;
+  border-radius: 5px;
+  background-color: #fef2f2;
+  color: #dc2626;
+  font-family: "Inter", sans-serif;
+  font-size: 14px;
+  text-align: center;
+}
+
+.signup-buttons {
+  display: flex;
+  gap: 10px;
+  margin-top: 5px;
+}
+
+.signup-buttons button {
+  flex: 1;
+  padding: 11px 16px;
+  border-radius: 5px;
+  font-family: "Inter", sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+}
+
+.signup-back-button {
+  background-color: #ffffff;
+  color: #334155;
+  border: 1px solid #94a3b8;
+}
+
+.signup-back-button:hover {
+  background-color: #f8fafc;
+}
+
+.signup-button {
+  background-color: #7c3aed;
+  color: #ffffff;
+  border: 1px solid #7c3aed;
+}
+
+.signup-button:hover {
+  background-color: #6d28d9;
+  border-color: #6d28d9;
+}
+
+/* =========================
+   LOGIN SUCCESS MESSAGE
+   ========================= */
+
+.signup-success {
+  margin: 10px 0px;
+  padding: 10px 12px;
+  border: 1px solid #16a34a;
+  border-radius: 5px;
+  background-color: #f0fdf4;
+  color: #15803d;
+  font-family: "Inter", sans-serif;
+  font-size: 14px;
+  text-align: center;
+}
+
+/* =========================
+   HOME PAGE
+   ========================= */
+
+.gameList {
+  width: 90%;
+  margin: 25px auto 50px;
+
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 90px 80px;
+
+  align-items: start;
+}
+
+/* Individual game tile */
+.gameCard {
+  min-width: 0;
+  cursor: pointer;
+
+  text-align: left;
+}
+
+/* Game cover */
+.gameCard img {
+  display: block;
+
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  height: auto;
+
+  object-fit: contain;
+
+  border-radius: 0;
+}
+
+/* Game name */
+.gameCard h4 {
+  margin: 8px 0 3px;
+
+  font-size: 14px;
+  font-weight: 500;
+}
+
+/* Game information */
+.gameCard p {
+  margin: 2px 0;
+
+  font-size: 12px;
+}
+
+/* =========================
+   SORTING
+   ========================= */
+
+.gameListHeader {
+  width: 90%;
+  margin: 0 auto;
+  padding: 15px 0;
+  background-color: #ffffff;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  position: sticky;
+  top: 80px;
+  z-index: 998;
+}
+
+.gameListHeader h3 {
+  margin: 0;
+  text-decoration: underline;
+}
+
+.sortControls {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+/* =========================
+   GAME OVERLAY
+   ========================= */
+
+.gameOverlay {
+  position: fixed;
+  inset: 0;
+
+  width: 100vw;
+  height: 100vh;
+
+  background-color: rgba(0, 0, 0, 0.6);
+
+  z-index: 9999;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.gameOverlayContent {
+  width: 60%;
+  height: 90%;
+  max-width: 90%;
+  min-height: 300px;
+  display: flex;
+  flex-direction: column;
+
+  padding: 25px;
+
+  background-color: #ffffff;
+  border-radius: 8px;
+
+  box-sizing: border-box;
+
+  position: relative;
+}
+
+.gameOverlayContent img {
+  display: block;
+
+  width: 40%;
+  aspect-ratio: 1 / 1;
+  height: auto;
+  margin: auto;
+
+  object-fit: contain;
+
+  border-radius: 0;
+}
+
+.gameOverlayContent h2 {
+  cursor: pointer;
+  width: fit-content;
+}
+
+.gameOverlayContent h3 {
+  text-align: center;
+}
+
+/* =========================
+   LOGIN PAGE
+   ========================= */
+
+.loginPage {
+  width: 100%;
+  flex: 1;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  padding: 15px 20px;
+  box-sizing: border-box;
+
+  background-color: #f8fafc;
+
+  font-family: "Inter", sans-serif;
+}
+
+/* =========================
+   HERO / CAROUSEL
+   ========================= */
+
+.carousel {
+  width: 100%;
+  max-width: 850px;
+  height: 280px;
+  margin-bottom: 50px;
+
+  position: relative;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  /*
+  background-color: #e2e8f0;
+  border-radius: 8px;
+*/
+  overflow: hidden;
+  flex-shrink: 0;
+}
+
+/* =========================
+   CAROUSEL IMAGES
+   ========================= */
+
+.carousel img {
+  position: absolute;
+
+  width: 30%;
+  height: fit-content;
+
+  object-fit: contain;
+  border-radius: 8px;
+
+  animation-duration: 20s;
+  animation-iteration-count: infinite;
+  animation-timing-function: ease-in-out;
+
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+/* =========================
+   IMAGE 1
+   ========================= */
+
+.carousel img:nth-child(1) {
+  animation-name: carouselWheel1;
+}
+
+/* =========================
+   IMAGE 2
+   ========================= */
+
+.carousel img:nth-child(2) {
+  animation-name: carouselWheel2;
+}
+
+/* =========================
+   IMAGE 3
+   ========================= */
+
+.carousel img:nth-child(3) {
+  animation-name: carouselWheel3;
+}
+
+/* =========================
+   IMAGE 1
+   RIGHT → CENTER → LEFT
+   ========================= */
+
+@keyframes carouselWheel1 {
+  /* RIGHT */
+  0%,
+  15% {
+    transform: translateX(260px) scale(0.75);
+    opacity: 0.45;
+    z-index: 1;
+  }
+
+  /* RIGHT → CENTER */
+  30% {
+    transform: translateX(0) scale(1);
+    opacity: 1;
+    z-index: 3;
+  }
+
+  /* CENTER */
+  45% {
+    transform: translateX(0) scale(1);
+    opacity: 1;
+    z-index: 3;
+  }
+
+  /* CENTER → LEFT */
+  60% {
+    transform: translateX(-260px) scale(0.75);
+    opacity: 0.45;
+    z-index: 1;
+  }
+
+  /* LEFT */
+  75% {
+    transform: translateX(-260px) scale(0.75);
+    opacity: 0.45;
+    z-index: 1;
+  }
+
+  /* LEFT → RIGHT */
+  100% {
+    transform: translateX(260px) scale(0.75);
+    opacity: 0.45;
+    z-index: 1;
   }
 }
-h2 {
+
+/* =========================
+   IMAGE 2
+   CENTER → LEFT → RIGHT
+   ========================= */
+
+@keyframes carouselWheel2 {
+  /* CENTER */
+  0%,
+  15% {
+    transform: translateX(0) scale(1);
+    opacity: 1;
+    z-index: 3;
+  }
+
+  /* CENTER → LEFT */
+  30% {
+    transform: translateX(-260px) scale(0.75);
+    opacity: 0.45;
+    z-index: 1;
+  }
+
+  /* LEFT */
+  45% {
+    transform: translateX(-260px) scale(0.75);
+    opacity: 0.45;
+    z-index: 1;
+  }
+
+  /* LEFT → RIGHT */
+  60% {
+    transform: translateX(260px) scale(0.75);
+    opacity: 0.45;
+    z-index: 1;
+  }
+
+  /* RIGHT */
+  75% {
+    transform: translateX(260px) scale(0.75);
+    opacity: 0.45;
+    z-index: 1;
+  }
+
+  /* RIGHT → CENTER */
+  100% {
+    transform: translateX(0) scale(1);
+    opacity: 1;
+    z-index: 3;
+  }
+}
+
+/* =========================
+   IMAGE 3
+   LEFT → RIGHT → CENTER
+   ========================= */
+
+@keyframes carouselWheel3 {
+  /* LEFT */
+  0%,
+  15% {
+    transform: translateX(-260px) scale(0.75);
+    opacity: 0.45;
+    z-index: 1;
+  }
+
+  /* LEFT → RIGHT */
+  30% {
+    transform: translateX(260px) scale(0.75);
+    opacity: 0.45;
+    z-index: 1;
+  }
+
+  /* RIGHT */
+  45% {
+    transform: translateX(260px) scale(0.75);
+    opacity: 0.45;
+    z-index: 1;
+  }
+
+  /* RIGHT → CENTER */
+  60% {
+    transform: translateX(0) scale(1);
+    opacity: 1;
+    z-index: 3;
+  }
+
+  /* CENTER */
+  75% {
+    transform: translateX(0) scale(1);
+    opacity: 1;
+    z-index: 3;
+  }
+
+  /* CENTER → LEFT */
+  100% {
+    transform: translateX(-260px) scale(0.75);
+    opacity: 0.45;
+    z-index: 1;
+  }
+}
+
+/* =========================
+   LOGIN FORM
+   ========================= */
+
+.loginForm {
+  width: 100%;
+  max-width: 450px;
+
+  padding: 25px 35px 25px;
+
+  box-sizing: border-box;
+
+  background-color: #ffffff;
+
+  border-radius: 8px;
+
+  box-shadow: 0 4px 20px rgba(15, 23, 42, 0.08);
+
+  flex-shrink: 0;
+}
+
+.loginForm h2 {
+  margin: 0 0 10px;
+
+  color: #0f172a;
   font-size: 24px;
-  line-height: 118%;
-  letter-spacing: -0.24px;
-  margin: 0 0 8px;
-  @media (max-width: 1024px) {
-    font-size: 20px;
-  }
+  font-weight: 600;
+  text-align: center;
 }
-p {
+
+/* =========================
+   FORM FIELDS
+   ========================= */
+
+.loginField {
+  display: flex;
+  flex-direction: column;
+
+  margin-bottom: 12px;
+}
+
+.loginField label {
+  margin-bottom: 5px;
+
+  color: #0f172a;
+  font-size: 13px;
+  font-weight: 500;
+}
+
+.loginField input {
+  width: 100%;
+  height: 38px;
+
+  padding: 0 10px;
+
+  box-sizing: border-box;
+
+  border: 1px solid #cbd5e1;
+  border-radius: 5px;
+
+  background-color: #ffffff;
+
+  color: #0f172a;
+
+  font-family: "Inter", sans-serif;
+  font-size: 14px;
+
+  outline: none;
+
+  transition:
+    border-color 0.15s ease,
+    box-shadow 0.15s ease;
+}
+
+.loginField input:focus {
+  border-color: #4f46e5;
+
+  box-shadow: 0 0 0 2px rgba(79, 70, 229, 0.15);
+}
+
+/* =========================
+   PASSWORD HEADER
+   ========================= */
+
+.passwordHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  margin-bottom: 5px;
+}
+
+.passwordHeader label {
   margin: 0;
 }
 
-code,
-.counter {
-  font-family: var(--mono);
-  display: inline-flex;
-  border-radius: 4px;
-  color: var(--text-h);
+.passwordHeader a {
+  color: #4f46e5;
+
+  font-size: 11px;
+  text-decoration: none;
 }
 
-code {
+.passwordHeader a:hover {
+  text-decoration: underline;
+}
+
+/* =========================
+   BUTTONS
+   ========================= */
+
+.loginButtons {
+  display: flex;
+  gap: 10px;
+
+  margin-top: 3px;
+}
+
+.loginButtons button {
+  flex: 1;
+
+  height: 38px;
+
+  border-radius: 5px;
+
+  font-family: "Inter", sans-serif;
+  font-size: 13px;
+  font-weight: 500;
+
+  cursor: pointer;
+
+  transition:
+    background-color 0.15s ease,
+    color 0.15s ease;
+}
+
+/* Login */
+
+#Login {
+  color: #ffffff;
+  background-color: #4f46e5;
+
+  border: 1px solid #4f46e5;
+}
+
+#Login:hover {
+  background-color: #4338ca;
+}
+
+/* Sign Up */
+
+#Signup {
+  color: #4f46e5;
+  background-color: #ffffff;
+
+  border: 1px solid #4f46e5;
+}
+
+#Signup:hover {
+  color: #ffffff;
+  background-color: #4f46e5;
+}
+
+/* =========================
+   MESSAGE
+   ========================= */
+
+.loginMessage {
+  margin: 10px 0 0;
+
+  color: #64748b;
+
+  font-size: 12px;
+  text-align: center;
+}
+
+.password-error {
+  margin: 8px 0 0 0;
+  padding: 8px 12px;
+  color: #b91c1c;
+  background-color: #fef2f2;
+  border: 1px solid #fecaca;
+  border-radius: 6px;
+  font-family: "Inter", sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+/* =========================
+   EDIT FORM
+   ========================= */
+
+#editForm {
+  width: 450px;
+  max-width: 90%;
+  margin: 30px auto;
+  padding: 25px 30px;
+
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+
+  box-sizing: border-box;
+
+  background: #ffffff;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.08);
+}
+
+/* Labels */
+
+#editForm label {
+  margin-top: 8px;
+
+  font-family: "Inter", sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  color: #333;
+}
+
+/* Inputs */
+
+#editForm select,
+#editForm textarea {
+  width: 100%;
+  box-sizing: border-box;
+
+  padding: 10px 12px;
+
+  font-family: "Inter", sans-serif;
+  font-size: 14px;
+
+  border: 1px solid #ccc;
+  border-radius: 6px;
+
+  background: #fff;
+  color: #333;
+
+  outline: none;
+  transition:
+    border-color 0.2s,
+    box-shadow 0.2s;
+}
+
+/* Focus */
+
+#editForm select:focus,
+#editForm textarea:focus {
+  border-color: #7c3aed;
+  box-shadow: 0 0 0 2px rgba(124, 58, 237, 0.12);
+}
+
+/* Notes */
+
+#editForm textarea {
+  min-height: 100px;
+  resize: vertical;
+}
+
+/* Favorite button */
+
+#favoriteButton {
+  width: fit-content;
+
+  padding: 9px 15px;
+
+  font-family: "Inter", sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+
+  border: 1px solid #ccc;
+  border-radius: 6px;
+
+  background: #fff;
+  color: #555;
+
+  cursor: pointer;
+
+  transition: 0.2s;
+}
+
+#favoriteButton:hover {
+  border-color: #7c3aed;
+  color: #7c3aed;
+}
+
+/* Favorited state */
+
+#favoriteButton[aria-pressed="true"] {
+  background: #7c3aed;
+  border-color: #7c3aed;
+  color: white;
+}
+
+/* Save button */
+
+#editForm button[type="submit"] {
+  width: 100%;
+
+  margin-top: 12px;
+  padding: 11px 15px;
+
+  font-family: "Inter", sans-serif;
   font-size: 15px;
-  line-height: 135%;
-  padding: 4px 8px;
-  background: var(--code-bg);
+  font-weight: 500;
+
+  border: none;
+  border-radius: 6px;
+
+  background: #7c3aed;
+  color: white;
+
+  cursor: pointer;
+
+  transition: background 0.2s;
+}
+
+#editForm button[type="submit"]:hover {
+  background: #6d28d9;
+}
+
+.saveMessage {
+  margin-top: 10px;
+  color: #16a34a;
+  font-family: "Inter", sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+/* =========================
+   Profile Page
+   ========================= */
+
+.profile {
+  width: 100%;
+  min-height: calc(100vh - 120px);
+
+  padding: 30px;
+
+  box-sizing: border-box;
+
+  display: grid;
+  grid-template-columns: 120px 1fr;
+  grid-template-rows: auto 1fr;
+
+  column-gap: 20px;
+
+  font-family: "Inter", sans-serif;
+}
+
+/* Favorite game image */
+.profile img {
+  grid-column: 1;
+  grid-row: 1;
+
+  display: block;
+
+  width: 120px;
+  height: 120px;
+
+  object-fit: contain;
+
+  border-radius: 0;
+}
+
+/* Email */
+.profile h2 {
+  grid-column: 2;
+  grid-row: 1;
+
+  align-self: start;
+
+  margin: 10px 0 0;
+
+  font-size: 20px;
+  font-weight: 500;
+}
+
+/* Member since */
+.profile > p {
+  grid-column: 2;
+  grid-row: 1;
+
+  align-self: start;
+
+  margin: 42px 0 0;
+
+  color: #64748b;
+  font-size: 14px;
+}
+
+/* Logout/Delete section */
+.profile-actions {
+  grid-column: 1 / -1;
+  grid-row: 3;
+
+  align-self: center;
+  justify-self: center;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  gap: 20px;
+}
+
+/* Logout button */
+#logout {
+  padding: 8px 15px;
+  color: black;
+  border: 1px solid #64748b;
+  border-radius: 6px;
+
+  background-color: #ffffff;
+
+  font-family: "Inter", sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+
+  cursor: pointer;
+
+  transform: translateY(-50%);
+
+  transition:
+    background-color 0.15s ease,
+    color 0.15s ease;
+}
+
+#logout:hover {
+  background-color: #d3d3d3;
+}
+
+/* Delete Account button */
+#deleteAccount {
+  padding: 8px 15px;
+  color: #ffffff;
+  background-color: #dc2626;
+  border: 1px solid #dc2626;
+  border-radius: 6px;
+
+  font-family: "Inter", sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+
+  cursor: pointer;
+
+  transform: translateY(-50%);
+
+  transition:
+    background-color 0.15s ease,
+    color 0.15s ease;
+}
+
+#deleteAccount:hover {
+  background-color: #b91c1c;
+  border-color: #b91c1c;
+}
+
+/* =========================
+   Log Out and Delete Overlays
+   ========================= */
+
+/* Overlay background */
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.55);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+/* Overlay box */
+.overlayBox {
+  width: 400px;
+  max-width: 90%;
+  padding: 30px;
+  box-sizing: border-box;
+  background-color: white;
+  border-radius: 10px;
+  text-align: center;
+  box-shadow: 0 5px 25px rgba(0, 0, 0, 0.3);
+}
+
+.overlayBox h2 {
+  margin-top: 0;
+  margin-bottom: 15px;
+}
+
+.overlayBox p {
+  margin-bottom: 20px;
+}
+
+/* Delete account email input */
+.overlayBox input {
+  width: 100%;
+  padding: 10px;
+  box-sizing: border-box;
+  border: 1px solid #94a3b8;
+  border-radius: 5px;
+  font-family: "Inter", sans-serif;
+  font-size: 14px;
+  margin-bottom: 10px;
+}
+
+.overlayBox input:focus {
+  outline: none;
+  border-color: #7c3aed;
+}
+
+/* Overlay buttons */
+.overlayButtons {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 20px;
+}
+
+.overlayButtons button {
+  padding: 10px 18px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-family: "Inter", sans-serif;
+  font-size: 14px;
+}
+
+.overlayButtons button:hover {
+  opacity: 0.9;
+}
+
+.overlayButtons button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* Delete error */
+.deleteError {
+  color: #dc2626;
+  font-size: 14px;
+  margin: 5px 0 !important;
+}
+
+/* =========================
+   Footer
+   ========================= */
+
+.footer {
+  width: 100%;
+  padding: 15px 0;
+  box-sizing: border-box;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  text-align: center;
+
+  background-color: #f8fafc;
+  border-top: 1px solid #64748b;
+
+  font-family: "Inter", sans-serif;
+}
+
+.footer p {
+  margin: 0;
+}
+
+/* =========================
+   RESPONSIVE
+   ========================= */
+
+/* 4 columns */
+@media (max-width: 1100px) {
+  .gameList {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+/* 3 columns */
+@media (max-width: 850px) {
+  .gameList {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 40px 25px;
+  }
+}
+
+/* 2 columns */
+@media (max-width: 600px) {
+  .gameList {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 30px 20px;
+  }
+
+  .loginPage {
+    padding: 10px 15px;
+  }
+
+  .carosuel {
+    height: 120px;
+    margin-bottom: 10px;
+  }
+
+  .loginForm {
+    padding: 20px 25px;
+  }
+}
+
+/* 1 column */
+@media (max-width: 400px) {
+  .gameList {
+    grid-template-columns: 1fr;
+  }
 }

@@ -1,13 +1,12 @@
-import { StrictMode, useEffect, useState } from "react";
-import { createRoot } from "react-dom/client";
-import { BrowserRouter, Routes, Route, Link } from "react-router-dom";
+import { useEffect, useState } from "react";
 import Header from "./components/Header";
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
-import Login from "./login";
+import { useUser } from "./userContext";
 import "./styles.css";
 
 export default function Home() {
+  const { userId } = useUser();
   //Create state variables for the sorting function, games list, and overlay status
   const [sortOption, setSortOption] = useState("nameA");
   const [gamesList, setGamesList] = useState<Game[]>([]);
@@ -17,19 +16,28 @@ export default function Home() {
   //Preset the return scheme for item objects to prevent initial load errors
   type Game = {
     _id: string;
+    userId: string;
+    gameId: string;
+    status: string;
+    notes: string;
     name: string;
-    CoverArtURL: string;
     generation: string;
-    status?: string;
-    bestTime?: string;
-    totalPlayTime?: number;
+    CoverArtURL: string;
+    isFavorite: boolean;
   };
 
   //Fetch games and update state on page load
   useEffect(() => {
+    if (!userId) {
+      console.error("User ID is not available.");
+      return;
+    }
+
     async function getGamesList() {
       try {
-        const response = await fetch("http://localhost:3000/games");
+        const response = await fetch(
+          `http://localhost:3000/userGames/${userId}`,
+        );
 
         if (!response.ok) {
           throw new Error("Failed to fetch games");
@@ -43,7 +51,7 @@ export default function Home() {
     }
 
     getGamesList();
-  }, []);
+  }, [userId]);
 
   //Function to sort games based on the selected option
   const sortedGames = [...gamesList].sort((a, b) => {
@@ -54,52 +62,62 @@ export default function Home() {
       case "nameZ":
         return b.name.localeCompare(a.name);
 
-      case "mostPlayed":
-        return (b.totalPlayTime ?? 0) - (a.totalPlayTime ?? 0);
-
       default:
         return 0;
     }
   });
 
+  //Function to handle status display
+  function getStatusText(status?: string) {
+    switch (status) {
+      case "not_started":
+        return "Not Started";
+      case "in_progress":
+        return "In Progress";
+      case "complete":
+        return "Completed";
+      default:
+        return "Unknown";
+    }
+  }
+
   return (
     <>
       <Header />
       <Navbar />
-
-      <h3>My Games</h3>
-      <h3>Sort By:</h3>
-      <select
-        value={sortOption}
-        onChange={(e) => setSortOption(e.target.value)}
-      >
-        <option value="nameA">Name A-Z</option>
-        <option value="nameZ">Name Z-A</option>
-        <option value="dateAsc">Date Ascending</option>
-        <option value="dateDesc">Date Descending</option>
-        <option value="mostPlayed">Most Played</option>
-      </select>
+      <div className="gameListHeader">
+        <h3>My Games</h3>
+        <div className="sortControls">
+          <label htmlFor="sort">Sort By:</label>
+          <select
+            id="sort"
+            value={sortOption}
+            onChange={(e) => setSortOption(e.target.value)}
+          >
+            <option value="nameA">Name A-Z</option>
+            <option value="nameZ">Name Z-A</option>
+          </select>
+        </div>
+      </div>
       <div className="gameList">
         {sortedGames.map((item) => (
-          <div key={item._id} className="gameCard">
+          <div
+            key={item._id}
+            className="gameCard"
+            onClick={() => {
+              setOverlay(!overlay);
+              setGame(item);
+            }}
+          >
             <img
               src={item.CoverArtURL}
               alt={item.name}
-              width="200"
-              height="280"
               loading="lazy"
               decoding="async"
-              onClick={() => {
-                setOverlay(!overlay);
-                setGame(item);
-              }}
             />
             <h4>{item.name}</h4>
-            <p>Status: {item.status}</p>
-            {item.bestTime && <p>Best Time: {item.bestTime}</p>}
-            {item.totalPlayTime && (
-              <p>Total Play Time: {item.totalPlayTime} hours</p>
-            )}
+            <p>Status: {getStatusText(item.status)}</p>
+            {item.isFavorite && <p>❤️ Favorite</p>}
           </div>
         ))}
       </div>
@@ -107,19 +125,18 @@ export default function Home() {
       {/** Overlay widget below */}
       {overlay && (
         <div className="gameOverlay">
-          <h2 onClick={() => setOverlay(!overlay)}>X</h2>
+          <div className="gameOverlayContent">
+            <h2 onClick={() => setOverlay(!overlay)}>X</h2>
+            <img src={game?.CoverArtURL} alt={game?.name} />
+            <h3>{game?.name}</h3>
+            <p>Status: {getStatusText(game?.status)}</p>
+            <p>Generation: {game?.generation}</p>
+            <p>Notes: {game?.notes}</p>
+            <p>Favorite: {game?.isFavorite ? "Yes" : "No"}</p>
+          </div>
         </div>
       )}
-      <div className="gameOverlay"></div>
       <Footer />
     </>
   );
 }
-
-createRoot(document.getElementById("root")!).render(
-  <StrictMode>
-    <BrowserRouter>
-      <Home />
-    </BrowserRouter>
-  </StrictMode>,
-);

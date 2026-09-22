@@ -24,11 +24,3 @@ export default function Resetpwd() {
     </>
   );
 }
-
-createRoot(document.getElementById("root")!).render(
-  <StrictMode>
-    <BrowserRouter>
-      <Resetpwd />
-    </BrowserRouter>
-  </StrictMode>,
-);

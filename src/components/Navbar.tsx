@@ -6,7 +6,7 @@ export default function Navbar() {
       <ul>
         <li className="nav-item">
           <NavLink
-            to=""
+            to="/home"
             className={({ isActive }) => (isActive ? "active" : "")}
           >
             Home
@@ -14,7 +14,7 @@ export default function Navbar() {
         </li>
         <li className="nav-item">
           <NavLink
-            to=""
+            to="/edit"
             className={({ isActive }) => (isActive ? "active" : "")}
           >
             Edit
@@ -22,15 +22,7 @@ export default function Navbar() {
         </li>
         <li className="nav-item">
           <NavLink
-            to=""
-            className={({ isActive }) => (isActive ? "active" : "")}
-          >
-            Stats
-          </NavLink>
-        </li>
-        <li className="nav-item">
-          <NavLink
-            to=""
+            to="/profile"
             className={({ isActive }) => (isActive ? "active" : "")}
           >
             Profile

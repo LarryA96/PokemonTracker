@@ -3,6 +3,7 @@ const express = require("express");
 const cors = require("cors");
 const users = require("./usersRoutes.cjs");
 const games = require("./gamesRoutes.cjs");
+const userGames = require("./userGamesRoutes.cjs");
 
 const app = express();
 const PORT = 3000;
@@ -11,6 +12,7 @@ app.use(cors());
 app.use(express.json());
 app.use(users);
 app.use(games);
+app.use(userGames);
 
 async function startServer() {
   try {
