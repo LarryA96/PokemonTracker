@@ -1,32 +1,48 @@
-# React + TypeScript + Vite
+# Pokémon Game Tracker
 
-This template provides a minimal setup to get React working in Vite with HMR and some Oxlint rules.
+A full-stack web application for tracking Pokémon games and personal
+playthrough progress.
 
-Currently, two official plugins are available:
+## Features
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+- User account registration and authentication
+- Game status tracking
+- Personal notes for each game
+- Favorite game selection
+- User profile
+- Account deletion
+- Game sorting and filtering
+- Responsive interface
 
-## React Compiler
+## Tech Stack
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+### Frontend
+- React
+- TypeScript
+- Vite
+- React Router
 
-## Expanding the Oxlint configuration
+### Backend
+- Node.js
+- Express
+- MongoDB
+- bcrypt
 
-If you are developing a production application, we recommend enabling type-aware lint rules by installing `oxlint-tsgolint` and editing `.oxlintrc.json`:
+## Architecture
 
-```json
-{
-  "$schema": "./node_modules/oxlint/configuration_schema.json",
-  "plugins": ["react", "typescript", "oxc"],
-  "options": {
-    "typeAware": true
-  },
-  "rules": {
-    "react/rules-of-hooks": "error",
-    "react/only-export-components": ["warn", { "allowConstantExport": true }]
-  }
-}
-```
+The application uses a React frontend communicating with an
+Express REST API backed by MongoDB.
 
-See the [Oxlint rules documentation](https://oxc.rs/docs/guide/usage/linter/rules) for the full list of rules and categories.
+Users are associated with their game records through a
+user/game relationship.
+
+## Running Locally
+
+...
+
+## Future Improvements
+
+- Password reset
+- Improved authentication security
+- Playthrough tracking
+- UI improvements
