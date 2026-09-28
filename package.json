@@ -7,7 +7,7 @@
   "scripts": {
     "dev": "vite",
     "server": "node src/server/server.cjs",
-    "start": "node src/main.tsx",
+    "start": "concurrently \"npm run dev\" \"npm run server\"",
     "build": "tsc -b && vite build",
     "lint": "oxlint",
     "preview": "vite preview",
