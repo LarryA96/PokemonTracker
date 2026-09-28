@@ -13,7 +13,7 @@ import ForgotPassword from "./forgotPassword";
 
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
-    <BrowserRouter basename="/PokemonTracker">
+    <BrowserRouter>
       <UserProvider>
         <Routes>
           <Route path="/" element={<Login />} />
