@@ -6,7 +6,7 @@ const games = require("./gamesRoutes.cjs");
 const userGames = require("./userGamesRoutes.cjs");
 
 const app = express();
-const PORT = 10000;
+const PORT = process.env.PORT || 3000;
 
 app.use(cors());
 app.use(express.json());

@@ -7,9 +7,9 @@ export default defineConfig({
   base: "/PokemonTracker",
   server: {
     proxy: {
-      "/users": "http://localhost:3000",
-      "/userGames": "http://localhost:3000",
-      "/games": "http://localhost:3000",
+      "/users": "https://pokemontracker-b0w1.onrender.com",
+      "/userGames": "https://pokemontracker-b0w1.onrender.com",
+      "/games": "https://pokemontracker-b0w1.onrender.com",
     },
   },
 });
