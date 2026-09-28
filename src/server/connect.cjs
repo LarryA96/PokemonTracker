@@ -1,5 +1,4 @@
-//File path relative to app loading at the PokemonProject root
-require("dotenv").config({ path: "./src/server/config.env" });
+require("dotenv").config({ path: "/etc/secrets/config.env" });
 const { MongoClient, ServerApiVersion } = require("mongodb");
 const uri = process.env.ATLAS_URI;
 
