@@ -1,6 +1,7 @@
 const { connectToServer } = require("./connect.cjs");
 const express = require("express");
 const cors = require("cors");
+const path = require("path");
 const users = require("./usersRoutes.cjs");
 const games = require("./gamesRoutes.cjs");
 const userGames = require("./userGamesRoutes.cjs");
@@ -10,9 +11,20 @@ const PORT = process.env.PORT || 3000;
 
 app.use(cors());
 app.use(express.json());
+
+//API routes
 app.use(users);
 app.use(games);
 app.use(userGames);
+
+//React frontend
+const distPath = path.join(__dirname, "../../dist");
+app.use(express.static(distPath));
+
+//React router fallback
+app.get("/{*splat}", (req, res) => {
+  res.sendFile(path.join(distPath, "index.html"));
+});
 
 async function startServer() {
   try {
@@ -25,6 +37,7 @@ async function startServer() {
     });
   } catch (error) {
     console.error("Failed to connect to MongoDB:", error);
+    process.exit(1);
   }
 }
 

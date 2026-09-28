@@ -41,9 +41,7 @@ export default function Edit() {
 
     async function getGamesList() {
       try {
-        const response = await fetch(
-          `http://localhost:3000/userGames/${userId}`,
-        );
+        const response = await fetch(`/userGames/${userId}`);
 
         if (!response.ok) {
           throw new Error("Failed to fetch games");
@@ -103,20 +101,17 @@ export default function Edit() {
     });
 
     try {
-      const response = await fetch(
-        `http://localhost:3000/userGames/${userId}/${gameId}`,
-        {
-          method: "PUT",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({
-            status,
-            notes,
-            isFavorite,
-          }),
+      const response = await fetch(`/userGames/${userId}/${gameId}`, {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
         },
-      );
+        body: JSON.stringify({
+          status,
+          notes,
+          isFavorite,
+        }),
+      });
 
       const data = await response.json();
 

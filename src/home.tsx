@@ -35,9 +35,7 @@ export default function Home() {
 
     async function getGamesList() {
       try {
-        const response = await fetch(
-          `http://localhost:3000/userGames/${userId}`,
-        );
+        const response = await fetch(`/userGames/${userId}`);
 
         if (!response.ok) {
           throw new Error("Failed to fetch games");
