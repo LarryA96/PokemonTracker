@@ -36,13 +36,12 @@ Express REST API backed by MongoDB.
 Users are associated with their game records through a
 user/game relationship.
 
-## Running Locally
-
-...
+## Live Link
+https://pokemontracker-b0w1.onrender.com/
 
 ## Future Improvements
 
-- Password reset
-- Improved authentication security
-- Playthrough tracking
+- Password Reset
+- Two-Factor Authentication
+- Nuzlocke Tracking
 - UI improvements
