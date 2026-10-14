@@ -48,9 +48,9 @@ export default function Login() {
       <Header />
       <main className="loginPage">
         <div className="carousel">
-          <img src="assets/emerald.jpg" alt="Pokemon Emerald" />
-          <img src="assets/black2.jpg" alt="Pokemon Black 2" />
-          <img src="assets/yellow.jpg" alt="Pokemon Yellow" />
+          <img src="/assets/emerald.jpg" alt="Pokemon Emerald" />
+          <img src="/assets/black2.jpg" alt="Pokemon Black 2" />
+          <img src="/assets/yellow.jpg" alt="Pokemon Yellow" />
         </div>
 
         <form className="loginForm" onSubmit={handleLogin}>
