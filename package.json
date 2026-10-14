@@ -5,7 +5,7 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "dev": "vite",
+    "dev": "concurrently \"npm run server\" \"node src/main.tsx\"",
     "server": "node src/server/server.cjs",
     "start": "node src/server/server.cjs",
     "build": "tsc -b && vite build",

@@ -48,18 +48,9 @@ export default function Login() {
       <Header />
       <main className="loginPage">
         <div className="carousel">
-          <img
-            src="https://upload.wikimedia.org/wikipedia/en/f/f7/PokemonEmeraldBox.jpg?utm_source=en.wikipedia.org&utm_campaign=index&utm_content=original"
-            alt="Pokemon Emerald"
-          />
-          <img
-            src="https://archives.bulbagarden.net/media/upload/3/34/Black_2_EN_boxart.png"
-            alt="Pokemon Black 2"
-          />
-          <img
-            src="https://archives.bulbagarden.net/media/upload/9/95/Yellow_EN_boxart.png"
-            alt="Pokemon Yellow"
-          />
+          <img src="assets/emerald.jpg" alt="Pokemon Emerald" />
+          <img src="assets/black2.jpg" alt="Pokemon Black 2" />
+          <img src="assets/yellow.jpg" alt="Pokemon Yellow" />
         </div>
 
         <form className="loginForm" onSubmit={handleLogin}>
