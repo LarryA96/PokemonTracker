@@ -108,7 +108,7 @@ export default function Home() {
             }}
           >
             <img
-              src={`/assets/${item._id}.jpg`}
+              src={`/assets/${item.gameId}.jpg`}
               alt={item.name}
               loading="lazy"
               decoding="async"
@@ -125,7 +125,7 @@ export default function Home() {
         <div className="gameOverlay">
           <div className="gameOverlayContent">
             <h2 onClick={() => setOverlay(!overlay)}>X</h2>
-            <img src={`/assets/${game?._id}.jpg`} alt={game?.name} />
+            <img src={`/assets/${game?.gameId}.jpg`} alt={game?.name} />
             <h3>{game?.name}</h3>
             <p>Status: {getStatusText(game?.status)}</p>
             <p>Generation: {game?.generation}</p>
